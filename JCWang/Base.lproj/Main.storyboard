@@ -493,7 +493,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="标题未知" borderStyle="roundedRect" placeholder="更改标题" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zik-tt-2Rp">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="标题未知" borderStyle="roundedRect" placeholder="标题未知" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zik-tt-2Rp">
                                 <rect key="frame" x="152" y="164" width="110" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -545,7 +545,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hzu-94-fMF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="SQx-Iw-IYY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5861" y="550"/>
+            <point key="canvasLocation" x="5755" y="550"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="U4I-hJ-uWG">
@@ -592,7 +592,7 @@
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="8yB-TV-rjX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="HJl-w1-99i">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -30,7 +30,11 @@ class DetailInfoBookmarkViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.title = "书签信息"
-        self.titleTextField.text = self.myTitle
+        if self.myTitle == "标题未知" {
+            self.titleTextField.text = ""
+        } else {
+            self.titleTextField.text = self.myTitle
+        }
         self.dateLabel.text = self.myDate
         self.websiteLabel.text = self.myWebUrl
         

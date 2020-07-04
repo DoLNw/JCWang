@@ -76,7 +76,7 @@ class TagsViewController: UIViewController {
         existingTags.append(newTag)
         self.setTags()
         newTagTextField.text = ""
-                
+        
         let button = UIButton(frame: CGRect(origin: CGPoint(x: self.view.bounds.width * 1.2, y: self.view.bounds.height * 0.3), size: self.tagSize + CGSize(width: 10, height: 8)))
         button.clipsToBounds = true
         button.backgroundColor = newTag.color
@@ -87,7 +87,8 @@ class TagsViewController: UIViewController {
         self.view.addSubview(button)
         
         //因为这个button是我在后面再添加进去的
-        viewHeight = self.view.bounds.height * 0.5 / CGFloat(self.tempButtons.count == 1 ?  1 : self.tempButtons.count)
+        //时刻注意除以0的情况
+        viewHeight = self.view.bounds.height * 0.5 / CGFloat(self.tempButtons.count == 0 ?  1 : self.tempButtons.count)
         
         let label = UILabel(frame: CGRect(origin: CGPoint(x: tagX + 35, y: heightSpace + viewHeight * CGFloat(self.tempButtons.count)), size: CGSize(width: 100, height: self.tagSize.height + 8)))
         label.backgroundColor = newTag.color

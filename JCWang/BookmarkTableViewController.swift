@@ -26,7 +26,7 @@ class BookmarkTableViewController: UITableViewController {
             for (allIndex, myBookmark) in self.myBookmarks.enumerated() {
                 if !myBookmark.isShowing {
 //                    myBookmark.isShowing = true
-                    myBookmarks[allIndex].isShowing = true
+                    myBookmark.isShowing = true
                     self.tempBookmarks.insert(myBookmark, at: allIndex)
                     allIndexPaths.append(IndexPath(row: allIndex, section: 0))
                 }
@@ -35,58 +35,52 @@ class BookmarkTableViewController: UITableViewController {
             self.tableView.insertRows(at: allIndexPaths, with: .automatic)
         case "Favorite":
             var tempCountIndex = 0
-//            var toBeaddedPaths: [IndexPath] = []
-//            var toBedeletedPaths: [IndexPath] = []
-            //此处不reversed是不行的，因为下面remove之后tempIndex还是有那么原始那么大，所以回Index out of range
-            //而且先下面remove再下下面insert是不行的，因为下面的remove不能修改bookmark的ishowing位false
-//            for (tempIndex, tempBookmark) in self.tempBookmarks.reversed().enumerated() {
-//                if !tempBookmark.favorite {
-//                    self.tempBookmarks.remove(at: originCount - tempIndex - 1)
-//                    unfavIndexPaths.append(IndexPath(row: originCount - tempIndex - 1, section: 0))
-//                }
-//            }
-//
-//            self.tableView.deleteRows(at: unfavIndexPaths, with: .automatic)
 
-            for (allIndex, myBookmark) in self.myBookmarks.enumerated() {
+            for myBookmark in self.myBookmarks {
                 if myBookmark.favorite && myBookmark.isShowing {
                     tempCountIndex += 1
                 } else if myBookmark.favorite && !myBookmark.isShowing {
-                    myBookmarks[allIndex].isShowing = true
+                    myBookmark.isShowing = true
                     self.tempBookmarks.insert(myBookmark, at: tempCountIndex)
                     self.tableView.insertRows(at: [IndexPath(row: tempCountIndex, section: 0)], with: .automatic)
+                    //这种加1加在哪里也是有顺序的
+                    tempCountIndex += 1
                 } else if !myBookmark.favorite && myBookmark.isShowing {
-                    myBookmarks[allIndex].isShowing = false
+                    myBookmark.isShowing = false
                     self.tempBookmarks.remove(at: tempCountIndex)
                     self.tableView.deleteRows(at: [IndexPath(row: tempCountIndex, section: 0)], with: .automatic)
                 }
             }
         case "About":
             var tempCountIndex = 0
-            for (allIndex, myBookmark) in self.myBookmarks.enumerated() {
+            for myBookmark in self.myBookmarks {
                 if myBookmark.aboutTag && myBookmark.isShowing {
                     tempCountIndex += 1
                 } else if myBookmark.aboutTag && !myBookmark.isShowing {
-                    myBookmarks[allIndex].isShowing = true
+                    myBookmark.isShowing = true
                     self.tempBookmarks.insert(myBookmark, at: tempCountIndex)
                     self.tableView.insertRows(at: [IndexPath(row: tempCountIndex, section: 0)], with: .automatic)
+                    //这种加1加在哪里也是有顺序的
+                    tempCountIndex += 1
                 } else if !myBookmark.aboutTag && myBookmark.isShowing {
-                    myBookmarks[allIndex].isShowing = false
+                    myBookmark.isShowing = false
                     self.tempBookmarks.remove(at: tempCountIndex)
                     self.tableView.deleteRows(at: [IndexPath(row: tempCountIndex, section: 0)], with: .automatic)
                 }
             }
         case "Unread":
             var tempCountIndex = 0
-            for (allIndex, myBookmark) in self.myBookmarks.enumerated() {
+            for myBookmark in self.myBookmarks {
                 if myBookmark.unread && myBookmark.isShowing {
                     tempCountIndex += 1
                 } else if myBookmark.unread && !myBookmark.isShowing {
-                    myBookmarks[allIndex].isShowing = true
+                    myBookmark.isShowing = true
                     self.tempBookmarks.insert(myBookmark, at: tempCountIndex)
                     self.tableView.insertRows(at: [IndexPath(row: tempCountIndex, section: 0)], with: .automatic)
+                    //这种加1加在哪里也是有顺序的
+                    tempCountIndex += 1
                 } else if !myBookmark.unread && myBookmark.isShowing {
-                    myBookmarks[allIndex].isShowing = false
+                    myBookmark.isShowing = false
                     self.tempBookmarks.remove(at: tempCountIndex)
                     self.tableView.deleteRows(at: [IndexPath(row: tempCountIndex, section: 0)], with: .automatic)
                 }
@@ -95,8 +89,8 @@ class BookmarkTableViewController: UITableViewController {
             break
         }
         
-        print(sender.titleForSegment(at: sender.selectedSegmentIndex))
-        print(sender.selectedSegmentIndex)
+//        print(sender.titleForSegment(at: sender.selectedSegmentIndex) ?? "none sender.titleForSegment(at: sender.selectedSegmentIndex)")
+//        print(sender.selectedSegmentIndex)
     }
     
     @objc func addNewBookmark() {
@@ -104,23 +98,31 @@ class BookmarkTableViewController: UITableViewController {
         if let paste = UIPasteboard.general.string {
             if paste.hasPrefix("http://") || paste.hasPrefix("https://") {
                 UIPasteboard.general.string = ""
-                self.myBookmarks.append(Bookmark(bookmarkLink: URL(string: paste)!))
+                let bookmark = Bookmark(bookmarkLink: URL(string: paste)!)
+                self.myBookmarks.append(bookmark)
 //                self.myBookmarks.last?.isShowing = true
                 self.setBookmarks()
                 //如果现在处在unread状态下，那么直接加进来的，否则在另外的三个状态下的话，我都变到第一个状态，这样就能可视化我加进去了这个
                 if segmentedControl.selectedSegmentIndex == 3 {
-                    self.tempBookmarks.append(Bookmark(bookmarkLink: URL(string: paste)!))
+                    //注意此处这么写的话就跟myBookmarks里面的不是同一个bookmark了，指向的就不是同一个了，所以会出错
+//                    self.tempBookmarks.append(Bookmark(bookmarkLink: URL(string: paste)!))
+                    self.tempBookmarks.append(bookmark)
                     self.tableView.insertRows(at: [IndexPath(row: self.tempBookmarks.count-1, section: 0)], with: .automatic)
                 } else {
+                    //下面这个之后，不会主动触发switchSegmentAct方法的，是我自己点击之后才触发的
                     segmentedControl.selectedSegmentIndex = 0
                     var allIndexPaths: [IndexPath] = []
                     for (allIndex, myBookmark) in self.myBookmarks.enumerated() {
                         if !myBookmark.isShowing {
-                            myBookmarks[allIndex].isShowing = true
+                            myBookmark.isShowing = true
                             self.tempBookmarks.insert(myBookmark, at: allIndex)
                             allIndexPaths.append(IndexPath(row: allIndex, section: 0))
                         }
                     }
+                    //因为这个一开始进来的时候是isShowing是true的，所以虽然myBookmarks已经有了，但是还是要重新加入一遍的
+                    //要加在最后，所以与上面这个if中的不能合并为一个语句
+                    self.tempBookmarks.append(bookmark)
+                    allIndexPaths.append(IndexPath(row: self.tempBookmarks.count-1, section: 0))
                     self.tableView.insertRows(at: allIndexPaths, with: .automatic)
                 }
                 
@@ -163,37 +165,40 @@ class BookmarkTableViewController: UITableViewController {
         
         addListener()
         
-        for i in 0..<self.myBookmarks.count {
-            self.myBookmarks[i].isShowing = true
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-            
+//        for i in 0..<self.myBookmarks.count {
+//            self.myBookmarks[i].isShowing = true
+//        }
+        
         //识别剪贴板中的内容
         if let paste = UIPasteboard.general.string, (paste.hasPrefix("http://") || paste.hasPrefix("https://")) {
             //如果剪贴板中的内容是链接
             let alert = UIAlertController(title: "是否收藏？", message: paste, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { Void in
                 UIPasteboard.general.string = ""
-                self.myBookmarks.append(Bookmark(bookmarkLink: URL(string: paste)!))
+                let bookmark = Bookmark(bookmarkLink: URL(string: paste)!)
+                self.myBookmarks.append(bookmark)
+//                self.myBookmarks.last?.isShowing = true  //本来就是true
                 self.setBookmarks()
-                
                 //如果现在处在unread状态下，那么直接加进来的，否则在另外的三个状态下的话，我都变到第一个状态，这样就能可视化我加进去了这个
                 if self.segmentedControl.selectedSegmentIndex == 3 {
-                    self.tempBookmarks.append(Bookmark(bookmarkLink: URL(string: paste)!))
+                    //注意此处这么写的话就跟myBookmarks里面的不是同一个bookmark了，指向的就不是同一个了，所以会出错
+//                    self.tempBookmarks.append(Bookmark(bookmarkLink: URL(string: paste)!))
+                    self.tempBookmarks.append(bookmark)
                     self.tableView.insertRows(at: [IndexPath(row: self.tempBookmarks.count-1, section: 0)], with: .automatic)
                 } else {
                     self.segmentedControl.selectedSegmentIndex = 0
                     var allIndexPaths: [IndexPath] = []
                     for (allIndex, myBookmark) in self.myBookmarks.enumerated() {
                         if !myBookmark.isShowing {
-                            self.myBookmarks[allIndex].isShowing = true
+                            myBookmark.isShowing = true
                             self.tempBookmarks.insert(myBookmark, at: allIndex)
                             allIndexPaths.append(IndexPath(row: allIndex, section: 0))
                         }
                     }
+                    //因为这个一开始进来的时候是isShowing是true的，所以虽然myBookmarks已经有了，但是还是要重新加入一遍的
+                    //要加在最后，所以与上面这个if中的不能合并为一个语句
+                    self.tempBookmarks.append(bookmark)
+                    allIndexPaths.append(IndexPath(row: self.tempBookmarks.count-1, section: 0))
                     self.tableView.insertRows(at: allIndexPaths, with: .automatic)
                 }
                 
@@ -213,6 +218,12 @@ class BookmarkTableViewController: UITableViewController {
 //           }
        }
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//
+//    }
 
     // MARK: - Table view data source
 
@@ -278,7 +289,9 @@ class BookmarkTableViewController: UITableViewController {
     @objc func setTrailingTags(tapGesture: UITapGestureRecognizer) {
         let cellContentView = tapGesture.view?.superview?.superview as! BookmarkTableViewCell
         //根据cellContentView.tag得知现在是第几个cell
-        currentSelectedCellNum = cellContentView.tag
+        //有时候就delete一个cell，然后其他的cell没有刷新，cellContentView.tag就出现了错误
+//        currentSelectedCellNum = cellContentView.tag
+        currentSelectedCellNum = (self.tableView.indexPath(for: cellContentView))!.row
 //        let baseLoca = cellContentView.trailingTags.frame.origin
 //        let baseBaseLoca = cellContentView.frame.origin
         
@@ -301,68 +314,71 @@ class BookmarkTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var showIndex = -1
-        var resIndexInmyBookmarks = 0
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            resIndexInmyBookmarks = indexPath.row
-        case 1:
-            for (index, bookmark) in self.myBookmarks.enumerated() {
-                if bookmark.favorite {
-                    showIndex += 1
-                    if showIndex == indexPath.row {
-                        resIndexInmyBookmarks = index
-                    }
-                }
-            }
-            break
-        case 2:
-            for (index, bookmark) in self.myBookmarks.enumerated() {
-                if bookmark.aboutTag {
-                    showIndex += 1
-                    if showIndex == indexPath.row {
-                        resIndexInmyBookmarks = index
-                    }
-                }
-            }
-            break
-        case 3:
-            for (index, bookmark) in self.myBookmarks.enumerated() {
-                if bookmark.aboutTag {
-                    showIndex += 1
-                    if showIndex == indexPath.row {
-                        resIndexInmyBookmarks = index
-                    }
-                }
-            }
-            break
-        default:
-            break
-        }
-        self.myBookmarks[resIndexInmyBookmarks].readNum += 1
-        if self.myBookmarks[resIndexInmyBookmarks].readNum >= 5 {
-            self.myBookmarks[resIndexInmyBookmarks].unread = false
+//        var showIndex = -1
+//        var resIndexInmyBookmarks = self.myBookmarks.firstIndex(of: self.tempBookmarks[indexPath.row])!
+
+//        switch segmentedControl.selectedSegmentIndex {
+//        case 0:
+//            resIndexInmyBookmarks = indexPath.row
+//        case 1:
+//            for (index, bookmark) in self.myBookmarks.enumerated() {
+//                if bookmark.favorite {
+//                    showIndex += 1
+//                    if showIndex == indexPath.row {
+//                        resIndexInmyBookmarks = index
+//                    }
+//                }
+//            }
+//            break
+//        case 2:
+//            for (index, bookmark) in self.myBookmarks.enumerated() {
+//                if bookmark.aboutTag {
+//                    showIndex += 1
+//                    if showIndex == indexPath.row {
+//                        resIndexInmyBookmarks = index
+//                    }
+//                }
+//            }
+//            break
+//        case 3:
+//            for (index, bookmark) in self.myBookmarks.enumerated() {
+//                if bookmark.aboutTag {
+//                    showIndex += 1
+//                    if showIndex == indexPath.row {
+//                        resIndexInmyBookmarks = index
+//                    }
+//                }
+//            }
+//            break
+//        default:
+//            break
+//        }
+//        self.myBookmarks[resIndexInmyBookmarks].readNum += 1
+//        if self.myBookmarks[resIndexInmyBookmarks].readNum >= 5 {
+//            self.myBookmarks[resIndexInmyBookmarks].unread = false
+//        }
+//        self.setBookmarks()
+        
+        let url = (self.tempBookmarks[indexPath.row].bookmarkLink)!
+        
+        //因为其实修改tempBookmarks数组里面指针指向的对象的值，这个myBookmarks里面的也会改变的
+        self.tempBookmarks[indexPath.row].readNum += 1
+        self.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .none)
+        if self.segmentedControl.selectedSegmentIndex == 3 && self.tempBookmarks[indexPath.row].readNum >= 5 {
+            self.tempBookmarks[indexPath.row].unread = false
+            self.tempBookmarks[indexPath.row].isShowing = false
+            self.tempBookmarks.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .none)
         }
         self.setBookmarks()
         
-        self.tempBookmarks[indexPath.row].readNum += 1
-        self.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .none)
-        if self.tempBookmarks[indexPath.row].readNum >= 5 {
-            self.tempBookmarks[indexPath.row].unread = false
-            self.tempBookmarks.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .none)
-            self.myBookmarks[resIndexInmyBookmarks].isShowing = false
-        }
-        
-        if let url = self.tempBookmarks[indexPath.row].bookmarkLink {
-            let config = SFSafariViewController.Configuration()
-            config.entersReaderIfAvailable = true
-            let sfWebviewCon = SFSafariViewController(url: url, configuration: config)
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = true
+        let sfWebviewCon = SFSafariViewController(url: url, configuration: config)
 //            sfWebviewCon.delegate = self
 //            self.navigationController?.pushViewController(sfWebviewCon, animated: true)
-            
-            self.present(sfWebviewCon, animated: true)
-        }
+        
+        self.present(sfWebviewCon, animated: true)
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
 //    override func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -386,11 +402,18 @@ class BookmarkTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let cellInfo = self.tempBookmarks[indexPath.row]
         let cell = self.tableView.cellForRow(at: indexPath) as! BookmarkTableViewCell
-        let likeAction = UIContextualAction(style: .normal, title: cellInfo.favorite ? "unfav" : "fav") { (_, _, completion) in
+        let likeAction = UIContextualAction(style: .normal, title: cellInfo.favorite ? "unfav" : "fav") { [unowned self] (_, _, completion) in
             cellInfo.favorite.toggle()
             
             cell.favTag.alpha = cellInfo.favorite ? 1 : 0
             self.setBookmarks()
+            
+            if self.segmentedControl.selectedSegmentIndex == 1 && !cellInfo.favorite {
+                self.tempBookmarks[indexPath.row].isShowing = false
+                self.tempBookmarks.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
             completion(true)
         }
         
@@ -414,47 +437,51 @@ class BookmarkTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            //注意要先运行remove之前的，因为如果remove掉了之后，可能就不是这一个了
+            let removedIndexInmyBookmarks = self.myBookmarks.firstIndex(of: self.tempBookmarks[indexPath.row])!
+
+            
+            self.tempBookmarks[indexPath.row].isShowing = false
             self.tempBookmarks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-            var showIndex = -1
-            var removedIndexInmyBookmarks = 0
-            switch segmentedControl.selectedSegmentIndex {
-            case 0:
-                removedIndexInmyBookmarks = indexPath.row
-            case 1:
-                for (index, bookmark) in self.myBookmarks.enumerated() {
-                    if bookmark.favorite {
-                        showIndex += 1
-                        if showIndex == indexPath.row {
-                            removedIndexInmyBookmarks = index
-                        }
-                    }
-                }
-                break
-            case 2:
-                for (index, bookmark) in self.myBookmarks.enumerated() {
-                    if bookmark.aboutTag {
-                        showIndex += 1
-                        if showIndex == indexPath.row {
-                            removedIndexInmyBookmarks = index
-                        }
-                    }
-                }
-                break
-            case 3:
-                for (index, bookmark) in self.myBookmarks.enumerated() {
-                    if bookmark.aboutTag {
-                        showIndex += 1
-                        if showIndex == indexPath.row {
-                            removedIndexInmyBookmarks = index
-                        }
-                    }
-                }
-                break
-            default:
-                break
-            }
+//            var showIndex = -1
+//            switch segmentedControl.selectedSegmentIndex {
+//            case 0:
+//                removedIndexInmyBookmarks = indexPath.row
+//            case 1:
+//                for (index, bookmark) in self.myBookmarks.enumerated() {
+//                    if bookmark.favorite {
+//                        showIndex += 1
+//                        if showIndex == indexPath.row {
+//                            removedIndexInmyBookmarks = index
+//                        }
+//                    }
+//                }
+//                break
+//            case 2:
+//                for (index, bookmark) in self.myBookmarks.enumerated() {
+//                    if bookmark.aboutTag {
+//                        showIndex += 1
+//                        if showIndex == indexPath.row {
+//                            removedIndexInmyBookmarks = index
+//                        }
+//                    }
+//                }
+//                break
+//            case 3:
+//                for (index, bookmark) in self.myBookmarks.enumerated() {
+//                    if bookmark.aboutTag {
+//                        showIndex += 1
+//                        if showIndex == indexPath.row {
+//                            removedIndexInmyBookmarks = index
+//                        }
+//                    }
+//                }
+//                break
+//            default:
+//                break
+//            }
             
             self.myBookmarks.remove(at: removedIndexInmyBookmarks)
             self.setBookmarks()
@@ -500,51 +527,51 @@ class BookmarkTableViewController: UITableViewController {
             }
             self.tempBookmarks[currentSelectedCellNum].numsAttachedBookmark = fromVC.cellBookmarkNums
             
-            var showIndex = -1
-            var resIndexInmyBookmarks = 0
-            switch segmentedControl.selectedSegmentIndex {
-            case 0:
-                resIndexInmyBookmarks = currentSelectedCellNum
-            case 1:
-                for (index, bookmark) in self.myBookmarks.enumerated() {
-                    if bookmark.favorite {
-                        showIndex += 1
-                        if showIndex == currentSelectedCellNum {
-                            resIndexInmyBookmarks = index
-                        }
-                    }
-                }
-                break
-            case 2:
-                for (index, bookmark) in self.myBookmarks.enumerated() {
-                    if bookmark.aboutTag {
-                        showIndex += 1
-                        if showIndex == currentSelectedCellNum {
-                            resIndexInmyBookmarks = index
-                        }
-                    }
-                }
-                break
-            case 3:
-                for (index, bookmark) in self.myBookmarks.enumerated() {
-                    if bookmark.aboutTag {
-                        showIndex += 1
-                        if showIndex == currentSelectedCellNum {
-                            resIndexInmyBookmarks = index
-                        }
-                    }
-                }
-                break
-            default:
-                break
-            }
-            for deleNum in deletingNums {
-                for (index, bookmark) in self.myBookmarks.enumerated() {
-                    self.myBookmarks[index].numsAttachedBookmark = (bookmark.numsAttachedBookmark.filter {return $0 != deleNum}).map { $0 > deleNum ? $0 - 1 : $0}
-                }
-            }
+//            var showIndex = -1
+//            var resIndexInmyBookmarks = 0
+//            switch segmentedControl.selectedSegmentIndex {
+//            case 0:
+//                resIndexInmyBookmarks = currentSelectedCellNum
+//            case 1:
+//                for (index, bookmark) in self.myBookmarks.enumerated() {
+//                    if bookmark.favorite {
+//                        showIndex += 1
+//                        if showIndex == currentSelectedCellNum {
+//                            resIndexInmyBookmarks = index
+//                        }
+//                    }
+//                }
+//                break
+//            case 2:
+//                for (index, bookmark) in self.myBookmarks.enumerated() {
+//                    if bookmark.aboutTag {
+//                        showIndex += 1
+//                        if showIndex == currentSelectedCellNum {
+//                            resIndexInmyBookmarks = index
+//                        }
+//                    }
+//                }
+//                break
+//            case 3:
+//                for (index, bookmark) in self.myBookmarks.enumerated() {
+//                    if bookmark.aboutTag {
+//                        showIndex += 1
+//                        if showIndex == currentSelectedCellNum {
+//                            resIndexInmyBookmarks = index
+//                        }
+//                    }
+//                }
+//                break
+//            default:
+//                break
+//            }
+//            for deleNum in deletingNums {
+//                for (index, bookmark) in self.myBookmarks.enumerated() {
+//                    self.myBookmarks[index].numsAttachedBookmark = (bookmark.numsAttachedBookmark.filter {return $0 != deleNum}).map { $0 > deleNum ? $0 - 1 : $0}
+//                }
+//            }
             //因为还有添加的标签，所以这一个被添加的需要写在这里
-            self.myBookmarks[resIndexInmyBookmarks].numsAttachedBookmark = fromVC.cellBookmarkNums
+//            self.myBookmarks[resIndexInmyBookmarks].numsAttachedBookmark = fromVC.cellBookmarkNums
             self.setBookmarks()
 //            print(self.myBookmarks[currentSelectedCell].numsAttachedBookmark)
             self.tableView.reloadData()
@@ -553,45 +580,45 @@ class BookmarkTableViewController: UITableViewController {
                 //上面accessoryButtonTappedForRowWith进入的时候不可以直接给textfield设置text的，因为UI们还是nil状态的
                 self.tempBookmarks[currentSelectedCellNum].title = fromVC.titleTextField.text!
                 
-                var showIndex = -1
-                var resIndexInmyBookmarks = 0
-                switch segmentedControl.selectedSegmentIndex {
-                case 0:
-                    resIndexInmyBookmarks = currentSelectedCellNum
-                case 1:
-                    for (index, bookmark) in self.myBookmarks.enumerated() {
-                        if bookmark.favorite {
-                            showIndex += 1
-                            if showIndex == currentSelectedCellNum {
-                                resIndexInmyBookmarks = index
-                            }
-                        }
-                    }
-                    break
-                case 2:
-                    for (index, bookmark) in self.myBookmarks.enumerated() {
-                        if bookmark.aboutTag {
-                            showIndex += 1
-                            if showIndex == currentSelectedCellNum {
-                                resIndexInmyBookmarks = index
-                            }
-                        }
-                    }
-                    break
-                case 3:
-                    for (index, bookmark) in self.myBookmarks.enumerated() {
-                        if bookmark.aboutTag {
-                            showIndex += 1
-                            if showIndex == currentSelectedCellNum {
-                                resIndexInmyBookmarks = index
-                            }
-                        }
-                    }
-                    break
-                default:
-                    break
-                }
-                self.myBookmarks[resIndexInmyBookmarks].title = fromVC.titleTextField.text!
+//                var showIndex = -1
+//                var resIndexInmyBookmarks = 0
+//                switch segmentedControl.selectedSegmentIndex {
+//                case 0:
+//                    resIndexInmyBookmarks = currentSelectedCellNum
+//                case 1:
+//                    for (index, bookmark) in self.myBookmarks.enumerated() {
+//                        if bookmark.favorite {
+//                            showIndex += 1
+//                            if showIndex == currentSelectedCellNum {
+//                                resIndexInmyBookmarks = index
+//                            }
+//                        }
+//                    }
+//                    break
+//                case 2:
+//                    for (index, bookmark) in self.myBookmarks.enumerated() {
+//                        if bookmark.aboutTag {
+//                            showIndex += 1
+//                            if showIndex == currentSelectedCellNum {
+//                                resIndexInmyBookmarks = index
+//                            }
+//                        }
+//                    }
+//                    break
+//                case 3:
+//                    for (index, bookmark) in self.myBookmarks.enumerated() {
+//                        if bookmark.aboutTag {
+//                            showIndex += 1
+//                            if showIndex == currentSelectedCellNum {
+//                                resIndexInmyBookmarks = index
+//                            }
+//                        }
+//                    }
+//                    break
+//                default:
+//                    break
+//                }
+//                self.myBookmarks[resIndexInmyBookmarks].title = fromVC.titleTextField.text!
                 self.setBookmarks()
                 self.tableView.reloadData()
             }
