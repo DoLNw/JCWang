@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		02145067249B868100FAA01B /* BookmarkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02145066249B868100FAA01B /* BookmarkTableViewController.swift */; };
 		02145069249B868F00FAA01B /* BookmarkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02145068249B868F00FAA01B /* BookmarkTableViewCell.swift */; };
-		021C2DC824A8A477000525DA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021C2DC724A8A477000525DA /* CloudKit.framework */; };
 		021C2DCA24A9DCD8000525DA /* DetailInfoBookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021C2DC924A9DCD8000525DA /* DetailInfoBookmarkViewController.swift */; };
+		0242B17425170A8F004441FC /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0242B17325170A8F004441FC /* Podfile */; };
 		0255B2DE249B69D800003C25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0255B2DD249B69D800003C25 /* AppDelegate.swift */; };
 		0255B2E0249B69D800003C25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0255B2DF249B69D800003C25 /* SceneDelegate.swift */; };
 		0255B2E5249B69D800003C25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0255B2E3249B69D800003C25 /* Main.storyboard */; };
 		0255B2E7249B69DC00003C25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0255B2E6249B69DC00003C25 /* Assets.xcassets */; };
 		0255B2EA249B69DC00003C25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0255B2E8249B69DC00003C25 /* LaunchScreen.storyboard */; };
+		028C6EE82515EE7B0023AEB3 /* FilterTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028C6EE72515EE7B0023AEB3 /* FilterTagsViewController.swift */; };
 		02F35BD024A47EBB008F5F59 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F35BCF24A47EBB008F5F59 /* Bookmark.swift */; };
 		02F35BD224A4A2A0008F5F59 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F35BD124A4A2A0008F5F59 /* Helper.swift */; };
 		02F35BD424A4C9C0008F5F59 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F35BD324A4C9BF008F5F59 /* TagsViewController.swift */; };
@@ -28,6 +29,7 @@
 		021C2DC524A8A26D000525DA /* JCWang.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JCWang.entitlements; sourceTree = "<group>"; };
 		021C2DC724A8A477000525DA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		021C2DC924A9DCD8000525DA /* DetailInfoBookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoBookmarkViewController.swift; sourceTree = "<group>"; };
+		0242B17325170A8F004441FC /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		0255B2DA249B69D800003C25 /* JCWang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JCWang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0255B2DD249B69D800003C25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0255B2DF249B69D800003C25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +37,7 @@
 		0255B2E6249B69DC00003C25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0255B2E9249B69DC00003C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0255B2EB249B69DC00003C25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		028C6EE72515EE7B0023AEB3 /* FilterTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagsViewController.swift; sourceTree = "<group>"; };
 		02F35BCF24A47EBB008F5F59 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		02F35BD124A4A2A0008F5F59 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		02F35BD324A4C9BF008F5F59 /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
@@ -46,7 +49,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				021C2DC824A8A477000525DA /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +66,7 @@
 		0255B2D1249B69D800003C25 = {
 			isa = PBXGroup;
 			children = (
+				0242B17325170A8F004441FC /* Podfile */,
 				0255B2DD249B69D800003C25 /* AppDelegate.swift */,
 				0255B2DC249B69D800003C25 /* JCWang */,
 				0255B2DB249B69D800003C25 /* Products */,
@@ -92,6 +95,7 @@
 				02F35BD524A4D027008F5F59 /* Tag.swift */,
 				02F35BCF24A47EBB008F5F59 /* Bookmark.swift */,
 				02145068249B868F00FAA01B /* BookmarkTableViewCell.swift */,
+				028C6EE72515EE7B0023AEB3 /* FilterTagsViewController.swift */,
 				0255B2E6249B69DC00003C25 /* Assets.xcassets */,
 				0255B2E8249B69DC00003C25 /* LaunchScreen.storyboard */,
 				0255B2EB249B69DC00003C25 /* Info.plist */,
@@ -159,6 +163,7 @@
 			files = (
 				0255B2EA249B69DC00003C25 /* LaunchScreen.storyboard in Resources */,
 				0255B2E7249B69DC00003C25 /* Assets.xcassets in Resources */,
+				0242B17425170A8F004441FC /* Podfile in Resources */,
 				0255B2E5249B69D800003C25 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02F35BD624A4D027008F5F59 /* Tag.swift in Sources */,
+				028C6EE82515EE7B0023AEB3 /* FilterTagsViewController.swift in Sources */,
 				02F35BD224A4A2A0008F5F59 /* Helper.swift in Sources */,
 				021C2DCA24A9DCD8000525DA /* DetailInfoBookmarkViewController.swift in Sources */,
 				0255B2DE249B69D800003C25 /* AppDelegate.swift in Sources */,

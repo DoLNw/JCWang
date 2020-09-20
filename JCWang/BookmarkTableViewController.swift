@@ -7,13 +7,20 @@
 //
 
 //由于要展示筛选所有、收藏、关于、未标记等。我用了一个tempBookmarks来表示，对这个与myBookmarks对比，加加减减。在fetch中先让tempBookmarks=myBookmarks，然后因为每次修改bookmark会是在点击cell之后，比如点击下面的标签修改标签（只有添加标签的话还好就改一个，删除标签的话，得改好多个的标签），然后点击detail按钮的话只会修改该bookmark的标题信息，这个还是简单的，上述两个点击都会设置currentSelectedCellNum来告诉你是哪一个cell的，所以修改复杂度还可以接受吧
+//打算接入微信第三方分享的，但是需要服务器填写UniversalLinks等一些东西，所以暂且不弄，搞搞widge等等
+//https://www.jianshu.com/p/9ac702b07b94
 
 import UIKit
 import SafariServices
 
 class BookmarkTableViewController: UITableViewController {
+    //感觉需要四个bookmarks来索引到，之前就myBookmarks和tempBookmarks俩的话可以switchsegment，但是筛选标签不太行。
+    //然后我再加两个
     var myBookmarks = [Bookmark(bookmarkLink: URL(string: "https://dolnw.github.io")!), Bookmark(bookmarkLink: URL(string: "http://www.baidu.com")!)]
     var tempBookmarks = [Bookmark(bookmarkLink: URL(string: "https://dolnw.github.io")!), Bookmark(bookmarkLink: URL(string: "http://www.baidu.com")!)]
+    var filterTagsBookmarks = [Bookmark(bookmarkLink: URL(string: "https://dolnw.github.io")!), Bookmark(bookmarkLink: URL(string: "http://www.baidu.com")!)]
+    var segmentBookmarks = [Bookmark(bookmarkLink: URL(string: "https://dolnw.github.io")!), Bookmark(bookmarkLink: URL(string: "http://www.baidu.com")!)]
+    
     var currentSelectedCellNum = -1
     
     var formerSegment = 0
@@ -22,8 +29,10 @@ class BookmarkTableViewController: UITableViewController {
     @IBAction func switchSegmentAct(_ sender: UISegmentedControl) {
         switch sender.titleForSegment(at: sender.selectedSegmentIndex) {
         case "All":
+            self.segmentBookmarks = self.myBookmarks
+            
             var allIndexPaths: [IndexPath] = []
-            for (allIndex, myBookmark) in self.myBookmarks.enumerated() {
+            for (allIndex, myBookmark) in self.filterTagsBookmarks.enumerated() {
                 if !myBookmark.isShowing {
 //                    myBookmark.isShowing = true
                     myBookmark.isShowing = true
@@ -33,10 +42,13 @@ class BookmarkTableViewController: UITableViewController {
             }
             
             self.tableView.insertRows(at: allIndexPaths, with: .automatic)
+            
         case "Favorite":
+            self.segmentBookmarks.removeAll(keepingCapacity: true)
+            self.segmentBookmarks = self.myBookmarks.filter{ return $0.favorite }
+            
             var tempCountIndex = 0
-
-            for myBookmark in self.myBookmarks {
+            for myBookmark in self.filterTagsBookmarks {
                 if myBookmark.favorite && myBookmark.isShowing {
                     tempCountIndex += 1
                 } else if myBookmark.favorite && !myBookmark.isShowing {
@@ -52,8 +64,11 @@ class BookmarkTableViewController: UITableViewController {
                 }
             }
         case "About":
+            self.segmentBookmarks.removeAll(keepingCapacity: true)
+            self.segmentBookmarks = self.myBookmarks.filter{ return $0.aboutTag }
+            
             var tempCountIndex = 0
-            for myBookmark in self.myBookmarks {
+            for myBookmark in self.filterTagsBookmarks {
                 if myBookmark.aboutTag && myBookmark.isShowing {
                     tempCountIndex += 1
                 } else if myBookmark.aboutTag && !myBookmark.isShowing {
@@ -69,8 +84,11 @@ class BookmarkTableViewController: UITableViewController {
                 }
             }
         case "Unread":
+            self.segmentBookmarks.removeAll(keepingCapacity: true)
+            self.segmentBookmarks = self.myBookmarks.filter{ return $0.unread }
+            
             var tempCountIndex = 0
-            for myBookmark in self.myBookmarks {
+            for myBookmark in self.filterTagsBookmarks {
                 if myBookmark.unread && myBookmark.isShowing {
                     tempCountIndex += 1
                 } else if myBookmark.unread && !myBookmark.isShowing {
@@ -93,6 +111,7 @@ class BookmarkTableViewController: UITableViewController {
 //        print(sender.selectedSegmentIndex)
     }
     
+    //目前添加的话是在别的标签筛选或者segment界面也是直接添加展示进去的，segment切换切不掉，筛选再按一遍可以
     @objc func addNewBookmark() {
         //识别剪贴板中的内容
         if let paste = UIPasteboard.general.string {
@@ -107,12 +126,16 @@ class BookmarkTableViewController: UITableViewController {
                     //注意此处这么写的话就跟myBookmarks里面的不是同一个bookmark了，指向的就不是同一个了，所以会出错
 //                    self.tempBookmarks.append(Bookmark(bookmarkLink: URL(string: paste)!))
                     self.tempBookmarks.append(bookmark)
+                    self.filterTagsBookmarks.append(bookmark)
+                    self.segmentBookmarks.append(bookmark)
                     self.tableView.insertRows(at: [IndexPath(row: self.tempBookmarks.count-1, section: 0)], with: .automatic)
                 } else {
                     //下面这个之后，不会主动触发switchSegmentAct方法的，是我自己点击之后才触发的
+                    self.segmentBookmarks = self.myBookmarks //上面myBookmarks已添加
+                    
                     segmentedControl.selectedSegmentIndex = 0
                     var allIndexPaths: [IndexPath] = []
-                    for (allIndex, myBookmark) in self.myBookmarks.enumerated() {
+                    for (allIndex, myBookmark) in self.filterTagsBookmarks.enumerated() {
                         if !myBookmark.isShowing {
                             myBookmark.isShowing = true
                             self.tempBookmarks.insert(myBookmark, at: allIndex)
@@ -122,6 +145,7 @@ class BookmarkTableViewController: UITableViewController {
                     //因为这个一开始进来的时候是isShowing是true的，所以虽然myBookmarks已经有了，但是还是要重新加入一遍的
                     //要加在最后，所以与上面这个if中的不能合并为一个语句
                     self.tempBookmarks.append(bookmark)
+                    self.filterTagsBookmarks.append(bookmark)
                     allIndexPaths.append(IndexPath(row: self.tempBookmarks.count-1, section: 0))
                     self.tableView.insertRows(at: allIndexPaths, with: .automatic)
                 }
@@ -137,13 +161,19 @@ class BookmarkTableViewController: UITableViewController {
         self.present(alert, animated: true)
     }
     
+//    @objc func filterTags() {
+//
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewdidload")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.add, style: .done, target: self, action: #selector(addNewBookmark
             ))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "circle.grid.cross.left.fill"), style: .done, target: self, action: #selector(filterTags))
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -439,7 +469,8 @@ class BookmarkTableViewController: UITableViewController {
             // Delete the row from the data source
             //注意要先运行remove之前的，因为如果remove掉了之后，可能就不是这一个了
             let removedIndexInmyBookmarks = self.myBookmarks.firstIndex(of: self.tempBookmarks[indexPath.row])!
-
+            let removedIndexInFilterBookmarks = self.filterTagsBookmarks.firstIndex(of: self.tempBookmarks[indexPath.row])
+            let removedIndexInSegmentBookmarks = self.segmentBookmarks.firstIndex(of: self.tempBookmarks[indexPath.row])
             
             self.tempBookmarks[indexPath.row].isShowing = false
             self.tempBookmarks.remove(at: indexPath.row)
@@ -484,6 +515,12 @@ class BookmarkTableViewController: UITableViewController {
 //            }
             
             self.myBookmarks.remove(at: removedIndexInmyBookmarks)
+            if let index = removedIndexInFilterBookmarks {
+                self.filterTagsBookmarks.remove(at: index)
+            }
+            if let index = removedIndexInSegmentBookmarks {
+                self.segmentBookmarks.remove(at: index)
+            }
             self.setBookmarks()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -622,6 +659,44 @@ class BookmarkTableViewController: UITableViewController {
                 self.setBookmarks()
                 self.tableView.reloadData()
             }
+        } else if let _ = segue.source as? FilterTagsViewController {
+            //emmm，此处没有做什么，因为我filter给全局变量existingTags已经修改了，我只要在viewwillappear中检查下有没有被修改，然后执行相应的操作就可以
+            self.filterTagsBookmarks.removeAll(keepingCapacity: true)
+            self.tempBookmarks.removeAll(keepingCapacity: true)
+            
+            var tempShownTags = [Int]()
+            for (index, tag) in existingTags.enumerated() {
+                if tag.isShown {
+                    tempShownTags.append(index)
+                }
+            }
+            
+            if tempShownTags.count == existingTags.count {
+                self.filterTagsBookmarks = self.myBookmarks
+            } else {
+                for bookmark in self.myBookmarks {
+                    for tagNum in bookmark.numsAttachedBookmark {
+                        if tempShownTags.contains(tagNum) {
+                            self.filterTagsBookmarks.append(bookmark)
+                            break
+                        }
+                    }
+                }
+            }
+            if tempShownTags.count == existingTags.count {
+                self.tempBookmarks = self.segmentBookmarks
+            } else {
+                for bookmark in self.segmentBookmarks {
+                    for tagNum in bookmark.numsAttachedBookmark {
+                        if tempShownTags.contains(tagNum) {
+                            self.tempBookmarks.append(bookmark)
+                            break
+                        }
+                    }
+                }
+            }
+            
+            self.tableView.reloadData()
         }
     }
     
@@ -658,19 +733,22 @@ extension BookmarkTableViewController {
     }
     
     func fetchBookmarks() -> Bool {
-        let store = NSUbiquitousKeyValueStore.default
-        do {
-            if let data = store.object(forKey: "bookmarks") as? Data {
-                if let bookmarks = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Bookmark] {
-                    print("iCloud读取Bookmarks成功")
-                    self.myBookmarks = bookmarks
-                    self.tempBookmarks = self.myBookmarks
-                    return true
-                }
-            }
-        } catch let error {
-            print("iCloud读取Bookmarks失败, error: \(error)")
-        }
+        //icloud因为过期，icloud读不出来，存不进去貌似，虽然说是成功的，先注释掉
+//        let store = NSUbiquitousKeyValueStore.default
+//        do {
+//            if let data = store.object(forKey: "bookmarks") as? Data {
+//                if let bookmarks = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Bookmark] {
+//                    print("iCloud读取Bookmarks成功")
+//                    self.myBookmarks = bookmarks
+//                    self.tempBookmarks = self.myBookmarks
+//                    self.filterTagsBookmarks = self.myBookmarks
+//                    self.segmentBookmarks = self.myBookmarks
+//                    return true
+//                }
+//            }
+//        } catch let error {
+//            print("iCloud读取Bookmarks失败, error: \(error)")
+//        }
         
         let user = UserDefaults.standard
         do {
@@ -678,6 +756,9 @@ extension BookmarkTableViewController {
                 if let bookmarks = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Bookmark] {
                     print("本地读取Bookmarks成功")
                     self.myBookmarks = bookmarks
+                    self.tempBookmarks = self.myBookmarks
+                    self.filterTagsBookmarks = self.myBookmarks
+                    self.segmentBookmarks = self.myBookmarks
                     return true
                 }
             }
@@ -712,18 +793,19 @@ extension BookmarkTableViewController {
     }
     
     func fetchTags() -> Bool {
-        let store = NSUbiquitousKeyValueStore.default
-        do {
-            if let data = store.object(forKey: "existingTags") as? Data {
-                if let tempExistingTags = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Tag] {
-                    print("iCloud读取Tags成功")
-                    existingTags = tempExistingTags
-                    return true
-                }
-            }
-        } catch let error {
-            print("iCloud读取Tags失败, error: \(error)")
-        }
+        //icloud因为过期，icloud读不出来，存不进去貌似，虽然说是成功的，先注释掉
+//        let store = NSUbiquitousKeyValueStore.default
+//        do {
+//            if let data = store.object(forKey: "existingTags") as? Data {
+//                if let tempExistingTags = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Tag] {
+//                    print("iCloud读取Tags成功")
+//                    existingTags = tempExistingTags
+//                    return true
+//                }
+//            }
+//        } catch let error {
+//            print("iCloud读取Tags失败, error: \(error)")
+//        }
         
         let user = UserDefaults.standard
         do {

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TzJ-Ku-TsX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TzJ-Ku-TsX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,8 +16,8 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="提醒" id="V9v-uW-upk"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -31,7 +33,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0Kc-Ln-vrD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="bookmarkTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="bookmarkTableViewCell" id="Paq-V8-Rbm" customClass="BookmarkTableViewCell" customModule="JCWang" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="100"/>
@@ -46,7 +48,7 @@
                                                 <constraint firstAttribute="height" constant="20" id="9ve-73-Bca"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" systemColor="systemGrayColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPB-in-mGZ">
@@ -65,7 +67,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -79,7 +81,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -93,7 +95,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -107,7 +109,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -121,7 +123,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -135,7 +137,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -149,7 +151,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -163,7 +165,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -177,7 +179,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -191,7 +193,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -205,7 +207,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -223,7 +225,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="value" systemColor="darkTextColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="9"/>
@@ -261,7 +263,7 @@
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGL-yf-Tev">
                                                     <rect key="frame" x="0.0" y="0.0" width="6" height="6"/>
-                                                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" systemColor="linkColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="6" id="Tjf-2L-Pr1"/>
                                                         <constraint firstAttribute="width" secondItem="qGL-yf-Tev" secondAttribute="height" multiplier="1:1" id="Ylg-SL-89u"/>
@@ -271,7 +273,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemOrangeColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="3"/>
@@ -280,7 +282,7 @@
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ig-TC-1qy">
                                                     <rect key="frame" x="0.0" y="21.5" width="6" height="6"/>
-                                                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" systemColor="linkColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="6" id="Bg4-TO-CQH"/>
                                                         <constraint firstAttribute="width" secondItem="3ig-TC-1qy" secondAttribute="height" multiplier="1:1" id="Q5e-7Z-hwm"/>
@@ -290,7 +292,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemBlueColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="3"/>
@@ -299,7 +301,7 @@
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIV-5g-M2r">
                                                     <rect key="frame" x="0.0" y="43" width="6" height="6"/>
-                                                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" systemColor="linkColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="xIV-5g-M2r" secondAttribute="height" multiplier="1:1" id="6qq-kd-F4z"/>
                                                         <constraint firstAttribute="height" constant="6" id="MbQ-F0-Uk2"/>
@@ -309,7 +311,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemGreenColor"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="3"/>
@@ -324,7 +326,7 @@
                                                 <constraint firstAttribute="height" constant="18" id="flB-GO-dkM"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                            <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" systemColor="systemGrayColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -365,6 +367,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="收藏" id="Nbq-mc-4Gw">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="circle.grid.cross.left.fill" catalog="system" id="cGY-LH-4hP">
+                            <connections>
+                                <segue destination="xWK-35-3sn" kind="presentation" id="0Iz-Mv-xWu"/>
+                            </connections>
+                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="cTN-Sf-HpK">
                             <rect key="frame" x="69.5" y="5.5" width="275" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -403,12 +410,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qcx-fP-FrG">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qcx-fP-FrG">
                                 <rect key="frame" x="304" y="440" width="30" height="30"/>
                                 <state key="normal" title="OK"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                        <color key="value" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemGreenColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="6"/>
@@ -418,7 +425,7 @@
                                     <action selector="addSureAction:" destination="9kD-7u-vaJ" eventType="touchUpInside" id="KnS-iE-kwX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSS-Dl-7Mq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSS-Dl-7Mq">
                                 <rect key="frame" x="334" y="682" width="30" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="vOc-Si-rf7"/>
@@ -427,7 +434,7 @@
                                 <state key="normal" title="OK"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                        <color key="value" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemYellowColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -438,7 +445,7 @@
                                     <segue destination="y21-pR-nSC" kind="unwind" identifier="1" unwindAction="backToBookmarkTableViewControllerWithSegue:" id="INi-HC-5RX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEe-Ud-KF9">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEe-Ud-KF9">
                                 <rect key="frame" x="334" y="119" width="30" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2Qb-ga-bbd"/>
@@ -447,7 +454,7 @@
                                 <state key="normal" title="OK"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                        <color key="value" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemGreenColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -458,7 +465,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="biJ-55-OWW"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NbX-mo-nX4" firstAttribute="centerY" secondItem="biJ-55-OWW" secondAttribute="centerY" constant="-50" id="2RA-iY-TsW"/>
                             <constraint firstItem="Qcx-fP-FrG" firstAttribute="centerX" secondItem="NbX-mo-nX4" secondAttribute="centerX" id="4Ks-LP-Lm6"/>
@@ -471,7 +479,6 @@
                             <constraint firstItem="YEe-Ud-KF9" firstAttribute="leading" relation="lessThanOrEqual" secondItem="biJ-55-OWW" secondAttribute="leading" constant="334" id="pJt-yQ-ERK"/>
                             <constraint firstItem="GSS-Dl-7Mq" firstAttribute="leading" relation="lessThanOrEqual" secondItem="biJ-55-OWW" secondAttribute="leading" constant="334" id="xJw-uy-2uk"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="biJ-55-OWW"/>
                     </view>
                     <navigationItem key="navigationItem" id="fFR-hf-Z5k"/>
                     <connections>
@@ -510,7 +517,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNx-Y6-lWM">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNx-Y6-lWM">
                                 <rect key="frame" x="337" y="166" width="62" height="30"/>
                                 <state key="normal" title="确认修改"/>
                                 <connections>
@@ -519,7 +526,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Gaz-os-gRD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Gaz-os-gRD" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1aa-Ml-pRd" secondAttribute="bottom" constant="200" id="1pE-kB-Z2c"/>
                             <constraint firstItem="1aa-Ml-pRd" firstAttribute="centerX" secondItem="Gaz-os-gRD" secondAttribute="centerX" id="6MG-tz-9HH"/>
@@ -534,7 +542,6 @@
                             <constraint firstItem="Zik-tt-2Rp" firstAttribute="top" secondItem="Gaz-os-gRD" secondAttribute="top" constant="120" id="wTG-4a-9bd"/>
                             <constraint firstItem="Zik-tt-2Rp" firstAttribute="centerX" secondItem="Gaz-os-gRD" secondAttribute="centerX" id="yTX-fI-NuT"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Gaz-os-gRD"/>
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="N5a-dj-Fzm" id="5Ds-7l-tAQ"/>
@@ -546,6 +553,41 @@
                 <exit id="SQx-Iw-IYY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5755" y="550"/>
+        </scene>
+        <!--Filter Tags View Controller-->
+        <scene sceneID="cDf-IJ-KGd">
+            <objects>
+                <viewController id="xWK-35-3sn" customClass="FilterTagsViewController" customModule="JCWang" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pi4-dL-FdJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qmu-Iw-Lr4">
+                                <rect key="frame" x="100" y="638" width="214" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="bfu-or-dLC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="OK"/>
+                                <connections>
+                                    <action selector="okAct:" destination="xWK-35-3sn" eventType="touchUpInside" id="wxp-D7-GbP"/>
+                                    <segue destination="GDg-jC-5Xr" kind="unwind" unwindAction="backToBookmarkTableViewControllerWithSegue:" id="Vi8-jE-Wdv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="VNl-Lq-AkM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Qmu-Iw-Lr4" firstAttribute="leading" secondItem="VNl-Lq-AkM" secondAttribute="leading" constant="100" id="F6L-mq-VNE"/>
+                            <constraint firstItem="VNl-Lq-AkM" firstAttribute="bottom" secondItem="Qmu-Iw-Lr4" secondAttribute="bottom" constant="100" id="Gmj-1a-2MV"/>
+                            <constraint firstItem="VNl-Lq-AkM" firstAttribute="trailing" secondItem="Qmu-Iw-Lr4" secondAttribute="trailing" constant="100" id="dO2-lT-BnX"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JjK-7G-Kyl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="GDg-jC-5Xr" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3848" y="1250"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="U4I-hJ-uWG">
@@ -605,4 +647,34 @@
             <point key="canvasLocation" x="2939" y="551"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="circle.grid.cross.left.fill" catalog="system" width="128" height="125"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

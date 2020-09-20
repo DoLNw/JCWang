@@ -30,4 +30,7 @@ class Tag: NSObject, NSCoding {
         self.color = color
         self.title = title
     }
+    
+    //筛选tag是不需要在本地存储的，这也要存储的话有点过了感觉?先不存了反正
+    var isShown = true
 }
